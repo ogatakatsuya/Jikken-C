@@ -1,0 +1,878 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dW:/Jikken-C/TinyProcessor_VHDL
+Ealu08
+Z1 w1728283621
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 2
+R0
+Z4 8W:/Jikken-C/TinyProcessor_VHDL/Resource.vhd
+Z5 FW:/Jikken-C/TinyProcessor_VHDL/Resource.vhd
+l0
+L445 1
+V47WBG5l?JV7Af[A6EZAjO0
+!s100 ]kmE<Q32US6GKA;1`7Lz`2
+Z6 OV;C;2020.1;71
+32
+Z7 !s110 1728283772
+!i10b 1
+Z8 !s108 1728283772.000000
+Z9 !s90 -reportprogress|30|-work|work|W:/Jikken-C/TinyProcessor_VHDL/Resource.vhd|
+Z10 !s107 W:/Jikken-C/TinyProcessor_VHDL/Resource.vhd|
+!i113 1
+Z11 o-work work
+Z12 tExplicit 1 CvgOpt 0
+Alogic
+R2
+R3
+DEx4 work 5 alu08 0 22 47WBG5l?JV7Af[A6EZAjO0
+!i122 2
+l476
+L457 63
+V79Z?d78]BjG@]nNDGNLK`1
+!s100 Vk7bF0dWI9MC3J>AD9>W^3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Econtroler
+R1
+R2
+R3
+!i122 0
+R0
+Z13 8W:/Jikken-C/TinyProcessor_VHDL/Control.vhd
+Z14 FW:/Jikken-C/TinyProcessor_VHDL/Control.vhd
+l0
+L9 1
+VGEBgi0A^`92]ZLk?0^<ZJ3
+!s100 ABSR4Z^Ulfd3Le007MV<l3
+R6
+32
+Z15 !s110 1728283771
+!i10b 1
+Z16 !s108 1728283771.000000
+Z17 !s90 -reportprogress|300|-work|work|W:/Jikken-C/TinyProcessor_VHDL/Control.vhd|
+Z18 !s107 W:/Jikken-C/TinyProcessor_VHDL/Control.vhd|
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 9 controler 0 22 GEBgi0A^`92]ZLk?0^<ZJ3
+!i122 0
+l132
+L44 346
+V<G_]=bQ2?RiHf4<Tck<dl3
+!s100 `VIYoCUnA41<Lz;g_<G6Z1
+R6
+32
+R15
+!i10b 1
+R16
+R17
+R18
+!i113 1
+R11
+R12
+Ecounter16
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L531 1
+VZW1SSAQiTGI0cfFQTNS833
+!s100 ZHcnC]l3JIzGZinjHj2o=1
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 9 counter16 0 22 ZW1SSAQiTGI0cfFQTNS833
+!i122 2
+l573
+L544 63
+V=gUa8cV7RVWiYI88K1Bb<0
+!s100 1Za;cf=Dlm>OOEQh<S9h81
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Edatapath
+R1
+R2
+R3
+!i122 1
+R0
+Z19 8W:/Jikken-C/TinyProcessor_VHDL/DataPath.vhd
+Z20 FW:/Jikken-C/TinyProcessor_VHDL/DataPath.vhd
+l0
+Z21 L10 1
+VEN:X;2Rb82b8a5D6eWC7X0
+!s100 cOYMIKD:dX_l0?QG8T;BQ2
+R6
+32
+R7
+!i10b 1
+R8
+Z22 !s90 -reportprogress|30|-work|work|W:/Jikken-C/TinyProcessor_VHDL/DataPath.vhd|
+Z23 !s107 W:/Jikken-C/TinyProcessor_VHDL/DataPath.vhd|
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 8 datapath 0 22 EN:X;2Rb82b8a5D6eWC7X0
+!i122 1
+l134
+L45 256
+VzaQ[ac?<0gQ3fJH8EX1De3
+!s100 ZYzIFAzSIa2@Cc<@N0fi30
+R6
+32
+R7
+!i10b 1
+R8
+R22
+R23
+!i113 1
+R11
+R12
+Edflipflop
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L18 1
+VcXKSE0^:jH`ZdBQjWmHn61
+!s100 IR62aZSfMBGc;RH_8N<Gl1
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 9 dflipflop 0 22 cXKSE0^:jH`ZdBQjWmHn61
+!i122 2
+l29
+L28 14
+V66Hm:mG4a2_LLzFmQdc`E1
+!s100 hHWf@;h@4E4Ih;QhncFn^1
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Efulladder
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L310 1
+VJcV5>_YRLam?B8mGUnb4_1
+!s100 [:ADbH<l7zU@LGV8Gb@L=0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Artl
+R2
+R3
+DEx4 work 9 fulladder 0 22 JcV5>_YRLam?B8mGUnb4_1
+!i122 2
+l321
+L320 5
+VdB:YO]jz6[dlbcha5=7gE3
+!s100 0QhMAoHM?YVJ`jeI4XGec2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Ejohnson1l0
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L618 1
+VBZ@kEKoI7V58@kTmT69GZ0
+!s100 iKQnI5E=6?21Gbf5LXUiL2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 10 johnson1l0 0 22 BZ@kEKoI7V58@kTmT69GZ0
+!i122 2
+l642
+L627 32
+Vn8@ScTfc@eaJZ03i>19FW1
+!s100 4UX5Qc1FNJ;_NB?lZ;CKX3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Ejohnson1l01
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L722 1
+VK0hbfkohbaZ8<n0cN^WbQ2
+!s100 NTCi@4aQf@Nz^I>Td[=^n0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 11 johnson1l01 0 22 K0hbfkohbaZ8<n0cN^WbQ2
+!i122 2
+l747
+L732 32
+Vd<6ij0^KcegcQBl3T16TA2
+!s100 H_jVg5TVT]]TB0NSKiZNN3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Ejohnson1l1
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L670 1
+VJfEQ_7jAD298o6_4R2m7N3
+!s100 ]O6lUX;>Zle;LX8oY53_12
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 10 johnson1l1 0 22 JfEQ_7jAD298o6_4R2m7N3
+!i122 2
+l694
+L679 31
+VEI_HHkfgOGQPM8cB[cg<S2
+!s100 ?P[VS`@2JXUga8lR3e3dL0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Ejohnson2l0
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L776 1
+V0A4dA<`J]YY:18UidG?z93
+!s100 n<=J]Mcod?2LV4VNdPZ<z3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 10 johnson2l0 0 22 0A4dA<`J]YY:18UidG?z93
+!i122 2
+l800
+L785 41
+VFWPT907A[D12LN79[Q^_^0
+!s100 U<DTN_]_I3Y3HmoXRN@Q`1
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Ejohnson3l0
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L838 1
+VzQzQINIkT8haQEDQLLoIb2
+!s100 Eikc^dnGBXLRO]Q:czeP32
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 10 johnson3l0 0 22 zQzQINIkT8haQEDQLLoIb2
+!i122 2
+l862
+L847 49
+VD[cNZb71hTP>h<ZooLH=f1
+!s100 [GkhzUo60jV3:_LzXYATP1
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Emux2x08
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L259 1
+Vjd=BIm`lDB=Qc3Vn<kRkC2
+!s100 o@h8aOPLm_GTOBjoYI6A91
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 7 mux2x08 0 22 jd=BIm`lDB=Qc3Vn<kRkC2
+!i122 2
+l269
+L268 5
+VZfD>Rn?g<XOzT?D^MMNJL0
+!s100 flDcj46=LZc;a@KNddc[P0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Emux2x16
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L285 1
+VYN7F5JK2^?hV]CC3U^ndM0
+!s100 lN8E`2TPM>:UV4Y=IHVRk3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 7 mux2x16 0 22 YN7F5JK2^?hV]CC3U^ndM0
+!i122 2
+l295
+L294 5
+VMDh>fkBj][0GVelcSPDb42
+!s100 WK0d0AQYb60FNGh0OC@A12
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Ercadder08
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L337 1
+VL<30coaDTzJg>bggld3]W3
+!s100 dANSoj:>gcOc=g>^3`3D_0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Artl
+R2
+R3
+DEx4 work 9 rcadder08 0 22 L<30coaDTzJg>bggld3]W3
+!i122 2
+l358
+L347 25
+Vz[_ifc`8X`EhD5`P4EXb70
+!s100 JUVm>7Q9KYkF<mkY6BB]?0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Ercadder16
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L384 1
+V>1S@zcMVYfUf>2L@mTf421
+!s100 N2`?^ZI<6HZgz4Y_D5mh:1
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Artl
+R2
+R3
+DEx4 work 9 rcadder16 0 22 >1S@zcMVYfUf>2L@mTf421
+!i122 2
+l405
+L394 25
+VeN_NDod6VFKC7I4nQiiji2
+!s100 l@LI=4YNShE8AgP<MPJ`o2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Eregister01
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L55 1
+V99]R1ShG3bjM==HN@DMOo1
+!s100 hhcDkA0`?Fi85jZZB@OFn2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 10 register01 0 22 99]R1ShG3bjM==HN@DMOo1
+!i122 2
+l80
+L65 26
+V>a=COOLaB@MOIW5l?ghOo3
+!s100 ]UPIBzQmj?TO1W?:L68I90
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Eregister08
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L105 1
+VT_A8CL1[L]f49cQBoX[S:3
+!s100 _?nLZge56Y<W3Acgnc7UH2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 10 register08 0 22 T_A8CL1[L]f49cQBoX[S:3
+!i122 2
+l131
+L115 29
+VdlH2B7Tj`K;zQWzHVNTC_2
+!s100 jnSgCLCW1:T>dGbga2jIV2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Eregister16
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L156 1
+VL[0K]PQC<YT?9_Q2b0h4^0
+!s100 T183PUQM:Oh?`<EAAgQbL0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 10 register16 0 22 L[0K]PQC<YT?9_Q2b0h4^0
+!i122 2
+l181
+L166 28
+V8R4`<;kTb?o^Ez=R5[>R_2
+!s100 ^W5o1L[f;EMlb5E=e`>3h1
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Eregister16in2
+R1
+R2
+R3
+!i122 2
+R0
+R4
+R5
+l0
+L205 1
+VoR[Ck0kJbZd<g6M]LfYJ71
+!s100 XOPz2K>K]T48in]Jao=Ee3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 13 register16in2 0 22 oR[Ck0kJbZd<g6M]LfYJ71
+!i122 2
+l229
+L217 30
+V[EIabMW09[EW`lOW0[P1G1
+!s100 9?8z;fVQdI878m_o<`gMR3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Etestprocessor
+R1
+Z24 DPx4 ieee 16 std_logic_textio 0 22 ^l:n6VFdg74Q?CKDhjD]D3
+Z25 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z26 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+R2
+R3
+!i122 3
+R0
+Z27 8W:/Jikken-C/TinyProcessor_VHDL/TestProcessor.vhd
+Z28 FW:/Jikken-C/TinyProcessor_VHDL/TestProcessor.vhd
+l0
+L25 1
+V4fUWQ5FmC:jQMYmAR<^mh0
+!s100 4H?:oQh[[`jgmIYl41KgP2
+R6
+32
+Z29 !s110 1728283773
+!i10b 1
+R8
+Z30 !s90 -reportprogress|30|-work|work|W:/Jikken-C/TinyProcessor_VHDL/TestProcessor.vhd|
+Z31 !s107 W:/Jikken-C/TinyProcessor_VHDL/TestProcessor.vhd|
+!i113 1
+R11
+R12
+Abehavior
+R24
+R25
+R26
+R2
+R3
+DEx4 work 13 testprocessor 0 22 4fUWQ5FmC:jQMYmAR<^mh0
+!i122 3
+l78
+L28 109
+V1Mb:d2@9K=4KET<6Em_U60
+!s100 HmgC]MEZ5d9bl9<G5LE8W1
+R6
+32
+R29
+!i10b 1
+R8
+R30
+R31
+!i113 1
+R11
+R12
+Etinyprocessor
+R1
+R2
+R3
+!i122 4
+R0
+Z32 8W:/Jikken-C/TinyProcessor_VHDL/TinyProcessor.vhd
+Z33 FW:/Jikken-C/TinyProcessor_VHDL/TinyProcessor.vhd
+l0
+R21
+V7eOkPEf2oZOo<jP>1e6F[1
+!s100 <V8=Z^WnFPiHf[Y8_:]<<1
+R6
+32
+R29
+!i10b 1
+Z34 !s108 1728283773.000000
+Z35 !s90 -reportprogress|30|-work|work|W:/Jikken-C/TinyProcessor_VHDL/TinyProcessor.vhd|
+!s107 W:/Jikken-C/TinyProcessor_VHDL/TinyProcessor.vhd|
+!i113 1
+R11
+R12
+Alogic
+R2
+R3
+DEx4 work 13 tinyprocessor 0 22 7eOkPEf2oZOo<jP>1e6F[1
+!i122 4
+l118
+L22 169
+VMTzHTG>[a6B>E6TolLKo`0
+!s100 TWlS]B8ZG52DWocTU@AXQ1
+R6
+32
+R29
+!i10b 1
+R34
+R35
+Z36 !s107 W:/Jikken-C/TinyProcessor_VHDL/TinyProcessor.vhd|
+!i113 1
+R11
+R12
