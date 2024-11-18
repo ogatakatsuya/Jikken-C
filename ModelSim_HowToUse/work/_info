@@ -1,0 +1,93 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d//192.168.18.250/wprofile/WS2019/kt-ogata/Downloads/ModelSim_HowToUse
+Egate
+Z1 w1728282815
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 0
+R0
+Z4 8//192.168.18.250/wprofile/WS2019/kt-ogata/Downloads/ModelSim_HowToUse/Gate.vhd
+Z5 F//192.168.18.250/wprofile/WS2019/kt-ogata/Downloads/ModelSim_HowToUse/Gate.vhd
+l0
+L4 1
+VoOzC1>S[aO8FXS<4a4aQP0
+!s100 X97>`kSmnd3nXYgoYDXgS2
+Z6 OV;C;2020.1;71
+32
+Z7 !s110 1728283047
+!i10b 1
+Z8 !s108 1728283047.000000
+Z9 !s90 -reportprogress|300|-work|work|//192.168.18.250/wprofile/WS2019/kt-ogata/Downloads/ModelSim_HowToUse/Gate.vhd|
+Z10 !s107 //192.168.18.250/wprofile/WS2019/kt-ogata/Downloads/ModelSim_HowToUse/Gate.vhd|
+!i113 1
+Z11 o-work work
+Z12 tExplicit 1 CvgOpt 0
+Agate
+R2
+R3
+DEx4 work 4 gate 0 22 oOzC1>S[aO8FXS<4a4aQP0
+!i122 0
+l17
+L16 8
+V^_cCoJJ]jN[]a`A3hUZTS3
+!s100 [XD8?IQ:9^U91THTSih=D2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Etestgate
+R1
+R2
+R3
+!i122 1
+R0
+Z13 8//192.168.18.250/wprofile/WS2019/kt-ogata/Downloads/ModelSim_HowToUse/TestGate.vhd
+Z14 F//192.168.18.250/wprofile/WS2019/kt-ogata/Downloads/ModelSim_HowToUse/TestGate.vhd
+l0
+L4 1
+V4@TQKDB^jR3ag0NP]jHY@2
+!s100 5FeoZcoGj9O7D2IK6?eEV2
+R6
+32
+R7
+!i10b 1
+R8
+Z15 !s90 -reportprogress|300|-work|work|//192.168.18.250/wprofile/WS2019/kt-ogata/Downloads/ModelSim_HowToUse/TestGate.vhd|
+!s107 //192.168.18.250/wprofile/WS2019/kt-ogata/Downloads/ModelSim_HowToUse/TestGate.vhd|
+!i113 1
+R11
+R12
+Atestgate
+R2
+R3
+DEx4 work 8 testgate 0 22 4@TQKDB^jR3ag0NP]jHY@2
+!i122 1
+l28
+L7 46
+VOJVhHYO<MNBkE[;k?Pn5D0
+!s100 6hP]^hIM7XKGCh`C8`zBc0
+R6
+32
+R7
+!i10b 1
+R8
+R15
+Z16 !s107 //192.168.18.250/wprofile/WS2019/kt-ogata/Downloads/ModelSim_HowToUse/TestGate.vhd|
+!i113 1
+R11
+R12
