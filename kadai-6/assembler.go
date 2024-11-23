@@ -61,31 +61,32 @@ func main() {
 
 	inputFile, err := os.Open(inputFilePath)
 	if err != nil {
-		fmt.Println("入力ファイルが開けませんでした。")
+		handleError("入力ファイルが開けませんでした", err)
 		return
 	}
 	defer inputFile.Close()
 
 	outputFile, err := os.Create(outputFilePath)
 	if err != nil {
-		fmt.Println("出力ファイルが開けませんでした。")
+		handleError("出力ファイルが開けませんでした", err)
 		return
 	}
 	defer outputFile.Close()
 
-	scanner := bufio.NewScanner(inputFile)
 	labelList, err := calculateLabelAddresses(inputFilePath)
 	if err != nil {
-		fmt.Println("ラベルアドレスの計算中にエラーが発生しました。")
+		handleError("ラベルアドレスの計算中にエラーが発生しました", err)
 		return
 	}
+
 	assembleLine := assemberGenerator(labelList)
+	scanner := bufio.NewScanner(inputFile)
 
 	for scanner.Scan() {
 		line := scanner.Text()
 		memoryList, binaryList, err := assembleLine(line)
 		if err != nil {
-			fmt.Println("アセンブリエラー:", err)
+			handleError(fmt.Sprintf("アセンブリエラー: %v", err), err)
 			continue
 		}
 		for i := 0; i < len(memoryList); i++ {
@@ -94,8 +95,15 @@ func main() {
 	}
 
 	if err := scanner.Err(); err != nil {
-		fmt.Println("読み込みエラーが発生しました。")
+		handleError("読み込みエラーが発生しました", err)
 		return
+	}
+}
+
+func handleError(message string, err error) {
+	fmt.Println(message)
+	if err != nil {
+		fmt.Println("詳細:", err)
 	}
 }
 
@@ -125,11 +133,7 @@ func assemberGenerator(labelList map[string]string) func(string) ([]string, []st
 				return nil, nil, fmt.Errorf("不明な命令: %s", opcodeStr)
 			}
 			if parts[1] == "DC" {
-				address := strings.Replace(parts[0], "#", "", 1)
-				value := strings.Replace(parts[2], "#", "", 1)
-				memory = append(memory, address)
-				binary = append(binary, value)
-				return memory, binary, nil
+				return handleDC(parts)
 			} else {
 				if len(parts) > 2 {
 					parts[1] = parts[2]
@@ -154,9 +158,7 @@ func assemberGenerator(labelList map[string]string) func(string) ([]string, []st
 				memory = append(memory, memoryStr)
 			} else if parts[1][0] == '#' {
 				address := strings.Replace(parts[1], "#", "", 1)
-				msb := address[:2]
-				lsb := address[2:]
-				binary = append(binary, msb, lsb)
+				binary = append(binary, address[:2], address[2:])
 				memoryAddress++
 				memoryStr = fmt.Sprintf("%04x", memoryAddress)
 				memory = append(memory, memoryStr)
@@ -165,9 +167,7 @@ func assemberGenerator(labelList map[string]string) func(string) ([]string, []st
 				memory = append(memory, memoryStr)
 			} else {
 				address := labelAddresses[parts[1]]
-				msb := address[:2]
-				lsb := address[2:]
-				binary = append(binary, msb, lsb)
+				binary = append(binary, address[:2], address[2:])
 				memoryAddress++
 				memoryStr = fmt.Sprintf("%04x", memoryAddress)
 				memory = append(memory, memoryStr)
@@ -179,6 +179,12 @@ func assemberGenerator(labelList map[string]string) func(string) ([]string, []st
 
 		return memory, binary, nil
 	}
+}
+
+func handleDC(parts []string) ([]string, []string, error) {
+	address := strings.Replace(parts[0], "#", "", 1)
+	value := strings.Replace(parts[2], "#", "", 1)
+	return []string{address}, []string{value}, nil
 }
 
 func calculateLabelAddresses(filePath string) (map[string]string, error) {
