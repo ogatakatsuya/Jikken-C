@@ -101,9 +101,8 @@ func main() {
 }
 
 func handleError(message string, err error) {
-	fmt.Println(message)
 	if err != nil {
-		fmt.Println("詳細:", err)
+		fmt.Println("Error! Detail:", err)
 	}
 }
 
@@ -166,7 +165,10 @@ func assemberGenerator(labelList map[string]string) func(string) ([]string, []st
 				memoryStr = fmt.Sprintf("%04x", memoryAddress)
 				memory = append(memory, memoryStr)
 			} else {
-				address := labelAddresses[parts[1]]
+				address, ok := labelAddresses[parts[1]]
+				if !ok {
+					return nil, nil, fmt.Errorf("ラベルが見つかりません: %s", parts[1])
+				}
 				binary = append(binary, address[:2], address[2:])
 				memoryAddress++
 				memoryStr = fmt.Sprintf("%04x", memoryAddress)
