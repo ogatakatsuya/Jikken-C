@@ -61,21 +61,21 @@ func main() {
 
 	inputFile, err := os.Open(inputFilePath)
 	if err != nil {
-		handleError("入力ファイルが開けませんでした", err)
+		handleError(err)
 		return
 	}
 	defer inputFile.Close()
 
 	outputFile, err := os.Create(outputFilePath)
 	if err != nil {
-		handleError("出力ファイルが開けませんでした", err)
+		handleError(err)
 		return
 	}
 	defer outputFile.Close()
 
 	labelList, err := calculateLabelAddresses(inputFilePath)
 	if err != nil {
-		handleError("ラベルアドレスの計算中にエラーが発生しました", err)
+		handleError(err)
 		return
 	}
 
@@ -86,7 +86,7 @@ func main() {
 		line := scanner.Text()
 		memoryList, binaryList, err := assembleLine(line)
 		if err != nil {
-			handleError(fmt.Sprintf("アセンブリエラー: %v", err), err)
+			handleError(err)
 			continue
 		}
 		for i := 0; i < len(memoryList); i++ {
@@ -95,12 +95,12 @@ func main() {
 	}
 
 	if err := scanner.Err(); err != nil {
-		handleError("読み込みエラーが発生しました", err)
+		handleError(err)
 		return
 	}
 }
 
-func handleError(message string, err error) {
+func handleError(err error) {
 	if err != nil {
 		fmt.Println("Error! Detail:", err)
 	}
