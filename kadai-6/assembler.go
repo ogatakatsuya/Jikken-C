@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -111,8 +112,8 @@ func assemberGenerator(labelList map[string]string) func(string) ([]string, []st
 	labelAddresses := labelList
 	return func(line string) ([]string, []string, error) {
 		var (
-			memory []string
-			binary []string
+			memory []string // メモリアドレスを格納する配列
+			binary []string // バイナリコードを格納する配列
 		)
 		parts := strings.Fields(line)
 		if len(parts) == 0 {
@@ -134,48 +135,66 @@ func assemberGenerator(labelList map[string]string) func(string) ([]string, []st
 			if parts[1] == "DC" {
 				return handleDC(parts)
 			} else {
+				address := strings.Replace(parts[0], "#", "", 1)
+				addressInt, err := strconv.ParseInt(address, 16, 64)
+
+				if err == nil {
+					fmt.Println(addressInt)
+					if int(addressInt) > memoryAddress {
+						for i := memoryAddress + 1; i <= int(addressInt); i++ {
+							memoryStr := fmt.Sprintf("%04x", memoryAddress)
+							memory = append(memory, memoryStr)
+							binary = append(binary, "00")
+							memoryAddress++
+						}
+					}
+				}
 				if len(parts) > 2 {
 					parts[1] = parts[2]
 				}
 			}
 		}
-		memoryAddress++
+		// オペコードの登録
 		opeCodeStr := fmt.Sprintf("%02x", instr.Opcode)
 		memoryStr := fmt.Sprintf("%04x", memoryAddress)
 		binary = append(binary, opeCodeStr)
 		memory = append(memory, memoryStr)
+		memoryAddress++
 
 		if instr.Operand != "None" {
 			if len(parts) < 2 {
 				return nil, nil, fmt.Errorf("オペランドが不足しています: %s", line)
 			}
 			if instr.Operand == "Memory" || instr.Operand == "Immediate" {
-				memoryAddress++
+				// オペランドが即値の場合
 				memoryStr := fmt.Sprintf("%04x", memoryAddress)
 				result := strings.Replace(parts[1], "#", "", 1)
 				binary = append(binary, result)
 				memory = append(memory, memoryStr)
+				memoryAddress++
 			} else if parts[1][0] == '#' {
+				// オペランドがアドレスの場合
 				address := strings.Replace(parts[1], "#", "", 1)
 				binary = append(binary, address[:2], address[2:])
-				memoryAddress++
 				memoryStr = fmt.Sprintf("%04x", memoryAddress)
 				memory = append(memory, memoryStr)
 				memoryAddress++
 				memoryStr = fmt.Sprintf("%04x", memoryAddress)
 				memory = append(memory, memoryStr)
+				memoryAddress++
 			} else {
+				// オペランドがラベルの場合
 				address, ok := labelAddresses[parts[1]]
 				if !ok {
 					return nil, nil, fmt.Errorf("ラベルが見つかりません: %s", parts[1])
 				}
 				binary = append(binary, address[:2], address[2:])
-				memoryAddress++
 				memoryStr = fmt.Sprintf("%04x", memoryAddress)
 				memory = append(memory, memoryStr)
 				memoryAddress++
 				memoryStr = fmt.Sprintf("%04x", memoryAddress)
 				memory = append(memory, memoryStr)
+				memoryAddress++
 			}
 		}
 
@@ -183,12 +202,14 @@ func assemberGenerator(labelList map[string]string) func(string) ([]string, []st
 	}
 }
 
+// DC命令の処理
 func handleDC(parts []string) ([]string, []string, error) {
 	address := strings.Replace(parts[0], "#", "", 1)
 	value := strings.Replace(parts[2], "#", "", 1)
 	return []string{address}, []string{value}, nil
 }
 
+// ラベルを検索して、アドレスを計算する
 func calculateLabelAddresses(filePath string) (map[string]string, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -214,14 +235,22 @@ func calculateLabelAddresses(filePath string) (map[string]string, error) {
 			if instr, ok := instructionSet[parts[1]]; ok {
 				address += instr.Size
 			}
-			memoryStr := fmt.Sprintf("%04x", address)
+			memoryStr := fmt.Sprintf("%04x", address-1)
 			labelAddresses[label] = memoryStr
 			continue
 		}
 
-		if instr, ok := instructionSet[parts[0]]; ok {
+		instr, ok := instructionSet[parts[0]]
+
+		if ok {
 			address += instr.Size
 			continue
+		} else {
+			jumpAddress := strings.Replace(parts[0], "#", "", 1)
+			addressInt, err := strconv.ParseInt(jumpAddress, 16, 64)
+			if err == nil {
+				address = int(addressInt)
+			}
 		}
 		if parts[0] == "PROGRAM" || parts[0] == "END" {
 			continue
