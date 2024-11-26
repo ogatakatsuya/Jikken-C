@@ -1,0 +1,10 @@
+PROGRAM START
+        SETIXH #80
+        SETIXL #00
+        LDIA   #50
+        LDDB
+        STDA   
+        STDI  #01
+        RET
+#8000   DC    #33
+END
