@@ -3,10 +3,15 @@ PROGRAM START
         SETIXL #80
         LDIA   #50
         LDDB
+        SETIXL #81
         STDA
+        SETIXL #82
         LDDB   
+        SETIXL #83
         STDI  #01
-        LDDB
         RET
 #8080   DC    #33
+#8081   DC    #00
+#8082   DC    #10
+#8083   DC    #00
 END
