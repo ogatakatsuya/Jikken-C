@@ -5,11 +5,11 @@ PROGRAM START
         SETIXL  #01
         LDDB
         CMP
-        JPZ     ZEND
+        JPZ     END
         SETIXL  #02
         LDDB
         CMP
-        JPZ     ZEND
+        JPZ     END
 LOOP:   NOP
         JPZ     END
         SETIXL  #01
@@ -20,8 +20,9 @@ LOOP:   NOP
         DECB
         STDB
         JP      LOOP
-ZEND:   LDIA    #00
-END:    NOP   
+END:    NOP
+        SETIXL  #03
+        STDA
 #8000   DC      #00
 #8001   DC      #50
 #8002   DC      #00
