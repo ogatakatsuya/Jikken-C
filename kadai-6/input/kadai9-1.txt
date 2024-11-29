@@ -10,10 +10,7 @@ PROGRAM START
         LDDB
         CMP
         JPZ     ZEND
-        SETIXL  #00
-        LDDA
 LOOP:   NOP
-        CMP
         JPZ     END
         SETIXL  #01
         LDDB
