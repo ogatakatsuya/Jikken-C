@@ -1,0 +1,38 @@
+PROGRAM START
+        LDIA    #53
+        LDIB    #22
+        ADDA
+        SUBA
+        ANDA
+        ORA
+        NOTA
+        INCA
+        DECA
+        ADDB
+        SUBA
+        ANDB
+        ORB
+        NOTB
+        INCB
+        DECB
+        ADDA
+        CMP
+        LDIA    #20
+        LDIB    #20
+        CMP
+        NOP
+        JP      LABEL1
+LABEL1: NOP
+        JPC     LABEL2
+        LDIA    #ff
+        LDIB    #01
+        ADDA
+        JPC     LABEL2
+LABEL2: NOP
+        JPZ     LABEL3
+        LDIA    #20
+        LDIB    #20
+        CMP
+        JPZ     LABEL3
+LABEL3: NOP
+END

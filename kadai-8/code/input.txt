@@ -15,6 +15,7 @@ PROGRAM START
         NOTB
         INCB
         DECB
+        ADDA
         CMP
         LDIA    #20
         LDIB    #20
@@ -22,11 +23,13 @@ PROGRAM START
         NOP
         JP      LABEL1
 LABEL1: NOP
+        JPC     LABEL2
         LDIA    #ff
         LDIB    #01
         ADDA
         JPC     LABEL2
 LABEL2: NOP
+        JPZ     LABEL3
         LDIA    #20
         LDIB    #20
         CMP
