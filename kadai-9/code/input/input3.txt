@@ -44,12 +44,12 @@ CHECKB: NOP
         LDDB
         CMP
         JPZ     ZERO
-        STDI    #00
+        LDIB    #00
         STDB
         JP      START
-ZERO:   STDI    #01
+ZERO:   LDIB    #01
         STDB
-START:  NOP
+START:  INCA
         LDIA    #00
         SETIXL  #04
         LDDB
@@ -66,6 +66,18 @@ LOOP:   NOP
 END:    NOP
         SETIXL  #05
         STDA
+        SETIXL  #00
+        LDDA
+        SETIXL  #02
+        LDDB
+        CMP
+        JPC     RETURN
+        SETIXL  #05
+        LDDA
+        NOTA
+        INCA
+        STDA
+RETURN: NOP
 #8000   DC      #00
 #8001   DC      #80
 #8002   DC      #00
