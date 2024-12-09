@@ -9,7 +9,7 @@ PROGRAM START
         INCA
         DECA
         ADDB
-        SUBA
+        SUBB
         ANDB
         ORB
         NOTB
