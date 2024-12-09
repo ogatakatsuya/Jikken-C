@@ -5,8 +5,10 @@ PROGRAM START
         SETIXL  #01
         STDA
         LDDB
-        NOP
+        DECA
+        DECA
         JPZ     #0010
+        NOP
         SETIXH  #FF
         SETIXL  #FF
         LDDA
