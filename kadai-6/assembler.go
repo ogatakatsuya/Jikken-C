@@ -91,7 +91,7 @@ func main() {
 			continue
 		}
 		for i := 0; i < len(memoryList); i++ {
-			outputFile.WriteString(memoryList[i] + "\t" + binaryList[i] + "\n")
+			outputFile.WriteString(memoryList[i][1:] + "\t:\t" + binaryList[i] + ";\n")
 		}
 	}
 
