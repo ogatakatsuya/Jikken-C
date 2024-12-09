@@ -1,0 +1,122 @@
+PROGRAM START
+        SETIXH  #80
+        SETIXL  #06
+        LDDA
+        SETIXH  #ff
+        SETIXL  #fe
+INPUT1: LDDB
+        CMP
+        JPZ     INPUT1
+        SETIXH  #ff
+        SETIXL  #ff
+        LDDB
+        SETIXH  #80
+        SETIXL  #03
+        STDB
+        SETIXH  #80
+        SETIXL  #00
+        LDDA
+        CMP
+        JPZ     END
+        SETIXH  #80
+        SETIXL  #01
+        LDDA
+        ANDB
+        SETIXH  #80
+        SETIXL  #00
+        LDDA
+        CMP
+        JPZ     CHECKB
+        SETIXH  #80
+        SETIXL  #03
+        LDDB
+        NOTB
+        INCB
+        STDB
+        SETIXH  #80
+        SETIXL  #02
+        LDIB    #01
+        STDB
+CHECKB: NOP
+        SETIXH  #80
+        SETIXL  #07
+        LDDA
+        SETIXH  #ff
+        SETIXL  #fe
+INPUT2: LDDB
+        CMP
+        JPZ     INPUT2
+        SETIXH  #ff
+        SETIXL  #ff
+        LDDB
+        SETIXH  #80
+        SETIXL  #04
+        STDB
+        SETIXH  #80
+        SETIXL  #00
+        CMP
+        JPZ     END
+        SETIXH  #80
+        SETIXL  #01
+        LDDA
+        ANDB
+        SETIXH  #80 
+        SETIXL  #00
+        LDDA
+        CMP
+        JPZ     START
+        SETIXH  #80
+        SETIXL  #04
+        LDDB
+        NOTB
+        INCB
+        STDB
+        SETIXH  #80
+        SETIXL  #02
+        LDDB
+        CMP
+        JPZ     ZERO
+        LDIB    #00
+        STDB
+        JP      START
+ZERO:   LDIB    #01
+        STDB
+START:  INCA
+        LDIA    #00
+        SETIXH  #80
+        SETIXL  #04
+        LDDB
+LOOP:   NOP
+        JPZ     END
+        SETIXL  #03
+        LDDB
+        ADDA
+        SETIXL  #04
+        LDDB
+        DECB
+        STDB
+        JP      LOOP
+END:    NOP
+        SETIXL  #05
+        STDA
+        SETIXL  #00
+        LDDA
+        SETIXL  #02
+        LDDB
+        CMP
+        JPC     RETURN
+        SETIXL  #05
+        LDDA
+        NOTA
+        INCA
+        STDA
+RETURN: NOP
+        JP      #0000
+#8000   DC      #00
+#8001   DC      #80
+#8002   DC      #00
+#8003   DC      #50
+#8004   DC      #ff
+#8005   DC      #00
+#8006   DC      #0f
+#8007   DC      #08
