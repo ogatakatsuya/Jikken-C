@@ -1,0 +1,48 @@
+PROGRAM START
+        LDIA    02
+        LDIB    05
+        SETIXH  #80
+        SETIXL  #01
+        STDA
+        LDDB
+        NOP
+        JPZ     #0010
+        SETIXH  #FF
+        SETIXL  #FF
+        LDDA
+        SETIXH  #80
+        SETIXL  #02
+        STDA
+        SETIXH  #FF
+        SETIXL  #FE
+        LDDA
+        SETIXH  #80
+        SETIXL  #03
+        STDA
+        NOP
+        JP      #0000
+        JP      #0060
+#0030   SETIXL  #FC
+        LDDA
+        SETIXL  #FE
+        STDA
+        JP      #0060
+#0040   SETIXL  #FC
+        LDDA
+        SETIXL  #FF
+        STDA
+        JP      #0060
+#0050   SETIXL  #FC
+        LDDA
+        SETIXL  #FE
+        STDA
+        SETIXL  #FF
+        STDA
+        JP      #0060
+#0060   SETIXL  #FB
+        LDDA
+        INCA
+        DECA
+        JPZ     #0000
+        JP      #0062
+END

@@ -2,27 +2,84 @@ PROGRAM START
         SETIXH  #80
         SETIXL  #00
         LDDA
-        SETIXL  #01
+        SETIXL  #03
         LDDB
         CMP
         JPZ     END
+        SETIXL  #01
+        LDDA
+        ANDB
+        SETIXL  #00
+        LDDA
+        CMP
+        JPZ     CHECKB
+        SETIXL  #03
+        LDDB
+        NOTB
+        INCB
+        STDB
+        SETIXL  #02
+        LDIB    #01
+        STDB
+CHECKB: NOP
+        SETIXL  #00
+        LDDA
+        SETIXL  #04
+        LDDB
+        CMP
+        JPZ     END
+        SETIXL  #01
+        LDDA
+        ANDB
+        SETIXL  #00
+        LDDA
+        CMP
+        JPZ     START
+        SETIXL  #04
+        LDDB
+        NOTB
+        INCB
+        STDB
         SETIXL  #02
         LDDB
         CMP
-        JPZ     END
+        JPZ     ZERO
+        LDIB    #00
+        STDB
+        JP      START
+ZERO:   LDIB    #01
+        STDB
+START:  INCA
+        LDIA    #00
+        SETIXL  #04
+        LDDB
 LOOP:   NOP
         JPZ     END
-        SETIXL  #01
+        SETIXL  #03
         LDDB
         ADDA
-        SETIXL  #02
+        SETIXL  #04
         LDDB
         DECB
         STDB
         JP      LOOP
 END:    NOP
-        SETIXL  #03
+        SETIXL  #05
         STDA
+        SETIXL  #00
+        LDDA
+        SETIXL  #02
+        LDDB
+        CMP
+        JPC     RETURN
+        SETIXL  #05
+        LDDA
+        NOTA
+        INCA
+        STDA
+RETURN: NOP
 #8000   DC      #00
-#8001   DC      #50
+#8001   DC      #80
 #8002   DC      #00
+#8003   DC      #50
+#8004   DC      #ff
