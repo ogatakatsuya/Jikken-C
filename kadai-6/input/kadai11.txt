@@ -146,4 +146,8 @@ RE:     LDDB
         CMP
         JPZ     JUMP
         JP      RE
-JUMP:   JP      #0000
+JUMP:   SETIXH  #80
+        SETIXL  #05
+        LDIA    #00
+        STDA
+        JP      #0000
