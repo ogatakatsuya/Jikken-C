@@ -15,9 +15,6 @@ PROGRAM START
         SETIXL  #04
         LDIA    #00
         STDA
-        SETIXL  #05
-        LDIA    #00
-        STDA
         SETIXL  #06
         LDIA    #04
         STDA
