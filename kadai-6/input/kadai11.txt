@@ -10,10 +10,10 @@ PROGRAM START
         LDIA    #00
         STDA
         SETIXL  #03
-        LDIA    #50
+        LDIA    #00
         STDA
         SETIXL  #04
-        LDIA    #ff
+        LDIA    #00
         STDA
         SETIXL  #05
         LDIA    #00
@@ -90,7 +90,7 @@ INPUT2: SETIXH  #ff
         SETIXL  #00
         LDDA
         CMP
-        JPZ     START
+        JPZ     END
         SETIXH  #80
         SETIXL  #04
         LDDB
