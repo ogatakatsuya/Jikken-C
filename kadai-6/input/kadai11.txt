@@ -19,7 +19,7 @@ PROGRAM START
         LDIA    #00
         STDA
         SETIXL  #06
-        LDIA    #0f
+        LDIA    #04
         STDA
         SETIXL  #07
         LDIA    #08
@@ -28,10 +28,11 @@ PROGRAM START
         LDDA
         SETIXH  #ff
         SETIXL  #fe
-INPUT1: LDDB
+WAIT1:  LDDB
         CMP
         JPZ     INPUT1
-        SETIXH  #ff
+        JP      WAIT1
+INPUT1: SETIXH  #ff
         SETIXL  #ff
         LDDB
         SETIXH  #80
@@ -67,10 +68,11 @@ CHECKB: NOP
         LDDA
         SETIXH  #ff
         SETIXL  #fe
-INPUT2: LDDB
+WAIT2:  LDDB
         CMP
         JPZ     INPUT2
-        SETIXH  #ff
+        JP      WAIT2
+INPUT2: SETIXH  #ff
         SETIXL  #ff
         LDDB
         SETIXH  #80
