@@ -1,5 +1,29 @@
 PROGRAM START
         SETIXH  #80
+        SETIXL  #00
+        LDIA    #00
+        STDA
+        SETIXL  #01
+        LDIA    #80
+        STDA
+        SETIXL  #02
+        LDIA    #00
+        STDA
+        SETIXL  #03
+        LDIA    #50
+        STDA
+        SETIXL  #04
+        LDIA    #ff
+        STDA
+        SETIXL  #05
+        LDIA    #00
+        STDA
+        SETIXL  #06
+        LDIA    #0f
+        STDA
+        SETIXL  #07
+        LDIA    #08
+        STDA
         SETIXL  #06
         LDDA
         SETIXH  #ff
@@ -112,11 +136,3 @@ END:    NOP
         STDA
 RETURN: NOP
         JP      #0000
-#8000   DC      #00
-#8001   DC      #80
-#8002   DC      #00
-#8003   DC      #50
-#8004   DC      #ff
-#8005   DC      #00
-#8006   DC      #0f
-#8007   DC      #08
