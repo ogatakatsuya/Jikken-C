@@ -21,6 +21,9 @@ PROGRAM START
         SETIXL  #07
         LDIA    #08
         STDA
+        SETIXL  #08
+        LDIA    #02
+        STDA
         SETIXL  #06
         LDDA
         SETIXH  #ff
@@ -134,4 +137,13 @@ END:    NOP
         INCA
         STDA
 RETURN: NOP
-        JP      #0000
+        SETIXH  #80
+        SETIXL  #80
+        LDDA
+        SETIXH  #ff
+        SETIXL  #fe
+RE:     LDDB
+        CMP
+        JPZ     JUMP
+        JP      RE
+JUMP:   JP      #0000
