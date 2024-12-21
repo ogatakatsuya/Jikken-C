@@ -1,85 +1,85 @@
 PROGRAM START
-        SETIXH  #80
-        SETIXL  #00
-        LDDA
-        SETIXL  #03
-        LDDB
-        CMP
-        JPZ     END
-        SETIXL  #01
-        LDDA
-        ANDB
-        SETIXL  #00
-        LDDA
-        CMP
-        JPZ     CHECKB
-        SETIXL  #03
-        LDDB
-        NOTB
-        INCB
-        STDB
-        SETIXL  #02
-        LDIB    #01
-        STDB
-CHECKB: NOP
-        SETIXL  #00
-        LDDA
-        SETIXL  #04
-        LDDB
-        CMP
-        JPZ     END
-        SETIXL  #01
-        LDDA
-        ANDB
-        SETIXL  #00
-        LDDA
-        CMP
-        JPZ     START
-        SETIXL  #04
-        LDDB
-        NOTB
-        INCB
-        STDB
-        SETIXL  #02
-        LDDB
-        CMP
-        JPZ     ZERO
-        LDIB    #00
-        STDB
-        JP      START
-ZERO:   LDIB    #01
-        STDB
-START:  INCA
-        LDIA    #00
-        SETIXL  #04
-        LDDB
-LOOP:   NOP
-        JPZ     END
-        SETIXL  #03
-        LDDB
-        ADDA
-        SETIXL  #04
-        LDDB
-        DECB
-        STDB
-        JP      LOOP
-END:    NOP
-        SETIXL  #05
-        STDA
-        SETIXL  #00
-        LDDA
-        SETIXL  #02
-        LDDB
-        CMP
-        JPC     RETURN
-        SETIXL  #05
-        LDDA
-        NOTA
-        INCA
-        STDA
-RETURN: NOP
-#8000   DC      #00
-#8001   DC      #80
-#8002   DC      #00
-#8003   DC      #50
-#8004   DC      #ff
+        SETIXH  #80     ;
+        SETIXL  #00     ; 0をロード
+        LDDA            ;
+        SETIXL  #03     ; 第1引数
+        LDDB            ;
+        CMP             ;
+        JPZ     END     ; 第1引数が0だったら終了
+        SETIXL  #01     ;
+        LDDA            ;
+        ANDB            ; #80でマスク
+        SETIXL  #00     ;
+        LDDA            ;
+        CMP             ;
+        JPZ     CHECKB  ; 最上位ビットが1でない(正)だったら第2引数へ
+        SETIXL  #03     ; 第1引数
+        LDDB            ;
+        NOTB            ;
+        INCB            ; ビット反転してインクリメントで正に変換
+        STDB            ;
+        SETIXL  #02     ;
+        LDIB    #01     ; 符号フラグを立てる
+        STDB            ;
+CHECKB: NOP             ;
+        SETIXL  #00     ;
+        LDDA            ;
+        SETIXL  #04     ;
+        LDDB            ;
+        CMP             ;
+        JPZ     END     ; 第2引数が0だったら終了
+        SETIXL  #01     ;
+        LDDA            ;
+        ANDB            ;
+        SETIXL  #00     ;
+        LDDA            ;
+        CMP             ;
+        JPZ     START   ; 第2引数が正だったら計算開始
+        SETIXL  #04     ;
+        LDDB            ;
+        NOTB            ;
+        INCB            ; ビット反転してインクリメントで正に変換
+        STDB            ;
+        SETIXL  #02     ;
+        LDDB            ;
+        CMP             ;
+        JPZ     ZERO    ; 符号フラグが0の場合はZEROへ飛ぶ
+        LDIB    #00     ; 符号フラグを0にする(負×負)
+        STDB            ;
+        JP      START   ;
+ZERO:   LDIB    #01     ; 符号フラグを1にする(正×負)
+        STDB            ;
+START:  NOP             ;
+        LDIA    #00     ; A=0(第2引数を足し合わせていく)
+        SETIXL  #04     ;       
+        LDDB            ; B={第2引数}
+LOOP:   NOP             ; 方針: RegAに第1引数を第2引数分だけ足し合わせる
+        JPZ     END     ; if B(第2引数)==0 jump END
+        SETIXL  #03     ;
+        LDDB            ; B={第1引数}
+        ADDA            ; A += B
+        SETIXL  #04     ;
+        LDDB            ;
+        DECB            ; 第2引数をデクリメント
+        STDB            ;
+        JP      LOOP    ;
+END:    NOP             ;
+        SETIXL  #05     ; 答えを格納するメモリ
+        STDA            ;
+        SETIXL  #00     ;
+        LDDA            ;
+        SETIXL  #02     ;
+        LDDB            ;
+        CMP             ;
+        JPC     RETURN  ; 符号フラグを見て、0だったらreturn
+        SETIXL  #05     ;
+        LDDA            ;       
+        NOTA            ;
+        INCA            ;
+        STDA            ; 符号フラグが1の場合、ビット反転してインクリメントで負にして#05に格納
+RETURN: NOP             ;
+#8000   DC      #00     ; 定数0
+#8001   DC      #80     ; 引数が負かどうかを判定するための定数(1000 0000)
+#8002   DC      #00     ; 符号フラグ(0は正で1は負)
+#8003   DC      #50     ; 第1引数
+#8004   DC      #ff     ; 第2引数
