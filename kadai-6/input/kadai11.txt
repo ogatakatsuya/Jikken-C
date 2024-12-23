@@ -1,0 +1,153 @@
+PROGRAM START
+        SETIXH  #80
+        SETIXL  #00
+        LDIA    #00
+        STDA
+        SETIXL  #01
+        LDIA    #80
+        STDA
+        SETIXL  #02
+        LDIA    #00
+        STDA
+        SETIXL  #03
+        LDIA    #00
+        STDA
+        SETIXL  #04
+        LDIA    #00
+        STDA
+        SETIXL  #06
+        LDIA    #04
+        STDA
+        SETIXL  #07
+        LDIA    #08
+        STDA
+        SETIXL  #08
+        LDIA    #02
+        STDA
+        SETIXL  #06
+        LDDA
+        SETIXH  #ff
+        SETIXL  #fe
+WAIT1:  LDDB
+        CMP
+        JPZ     INPUT1
+        JP      WAIT1
+INPUT1: SETIXH  #ff
+        SETIXL  #ff
+        LDDB
+        SETIXH  #80
+        SETIXL  #03
+        STDB
+        SETIXH  #80
+        SETIXL  #00
+        LDDA
+        CMP
+        JPZ     END
+        SETIXH  #80
+        SETIXL  #01
+        LDDA
+        ANDB
+        SETIXH  #80
+        SETIXL  #00
+        LDDA
+        CMP
+        JPZ     CHECKB
+        SETIXH  #80
+        SETIXL  #03
+        LDDB
+        NOTB
+        INCB
+        STDB
+        SETIXH  #80
+        SETIXL  #02
+        LDIB    #01
+        STDB
+CHECKB: NOP
+        SETIXH  #80
+        SETIXL  #07
+        LDDA
+        SETIXH  #ff
+        SETIXL  #fe
+WAIT2:  LDDB
+        CMP
+        JPZ     INPUT2
+        JP      WAIT2
+INPUT2: SETIXH  #ff
+        SETIXL  #ff
+        LDDB
+        SETIXH  #80
+        SETIXL  #04
+        STDB
+        SETIXH  #80
+        SETIXL  #00
+        CMP
+        JPZ     END
+        SETIXH  #80
+        SETIXL  #01
+        LDDA
+        ANDB
+        SETIXH  #80 
+        SETIXL  #00
+        LDDA
+        CMP
+        JPZ     END
+        SETIXH  #80
+        SETIXL  #04
+        LDDB
+        NOTB
+        INCB
+        STDB
+        SETIXH  #80
+        SETIXL  #02
+        LDDB
+        CMP
+        JPZ     ZERO
+        LDIB    #00
+        STDB
+        JP      START
+ZERO:   LDIB    #01
+        STDB
+START:  INCA
+        LDIA    #00
+        SETIXH  #80
+        SETIXL  #04
+        LDDB
+LOOP:   NOP
+        JPZ     END
+        SETIXL  #03
+        LDDB
+        ADDA
+        SETIXL  #04
+        LDDB
+        DECB
+        STDB
+        JP      LOOP
+END:    NOP
+        SETIXL  #05
+        STDA
+        SETIXL  #00
+        LDDA
+        SETIXL  #02
+        LDDB
+        CMP
+        JPC     RETURN
+        SETIXL  #05
+        LDDA
+        NOTA
+        INCA
+        STDA
+RETURN: NOP
+        SETIXH  #80
+        SETIXL  #80
+        LDDA
+        SETIXH  #ff
+        SETIXL  #fe
+RE:     LDDB
+        CMP
+        JPZ     JUMP
+        JP      RE
+JUMP:   SETIXH  #80
+        SETIXL  #05
+        LDIA    #00
+        STDA
+        JP      #0000

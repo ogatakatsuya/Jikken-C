@@ -1,5 +1,42 @@
 PROGRAM START
         SETIXH  #80     ;
+        SETIXL  #00     ; #8000: 定数 #00
+        LDIA    #00     ;
+        STDA            ;
+        SETIXL  #01     ; #8001: 定数 #80
+        LDIA    #80     ;
+        STDA            ;
+        SETIXL  #02     ; #8002: 符号フラグ初期化
+        LDIA    #00     ;
+        STDA            ;
+        SETIXL  #03     ; #8003: 第1引数初期化
+        LDIA    #00     ;
+        STDA            ;
+        SETIXL  #04     ; #8004: 第2引数初期化
+        LDIA    #00     ;
+        STDA            ;
+        SETIXL  #06     ; #8006: 定数 #08(第1引数確定用)
+        LDIA    #08     ;
+        STDA            ;
+        SETIXL  #07     ; #8007: 定数 #04(第2引数確定用)
+        LDIA    #04     ;
+        STDA            ;
+        SETIXL  #08     ; #8008: 定数 #02(リセット用)
+        LDIA    #02     ;
+        STDA            ;
+        SETIXL  #06     ; #08
+        LDDA            ;
+        SETIXH  #ff     ;
+        SETIXL  #fe     ; プッシュボタンのアドレス
+WAIT1:  LDDB            ; プッシュボタンの値をずっとウォッチする
+        CMP             ;
+        JPZ     INPUT1  ; #08が押されたら入力確定
+        JP      WAIT1   ;
+INPUT1: SETIXL  #ff     ; 
+        LDDB            ; 入力値をRegBに格納
+        SETIXH  #80     ;
+        SETIXL  #03     ;
+        STDB            ; 第1引数のメモリに格納
         SETIXL  #00     ; 0をロード
         LDDA            ;
         SETIXL  #03     ; 第1引数
@@ -22,6 +59,19 @@ PROGRAM START
         LDIB    #01     ; 符号フラグを立てる
         STDB            ;
 CHECKB: NOP             ;
+        SETIXL  #07     ; #04
+        LDDA            ;
+        SETIXH  #ff     ;
+        SETIXL  #fe     ; プッシュボタンのアドレス
+WAIT2:  LDDB            ; プッシュボタンの値をウォッチ
+        CMP             ;
+        JPZ     INPUT2  ; #04が押されたら入力確定
+        JP      WAIT2   ;
+INPUT2: SETIXL  #ff     ;
+        LDDB            ; RegBに第2引数を格納
+        SETIXH  #80     ;
+        SETIXL  #04     ;
+        STDB            ; 第2引数のメモリに格納
         SETIXL  #00     ;
         LDDA            ;
         SETIXL  #04     ;
@@ -71,15 +121,22 @@ END:    NOP             ;
         SETIXL  #02     ;
         LDDB            ;
         CMP             ;
-        JPC     RETURN  ; 符号フラグを見て、0だったらreturn
+        JPZ     RETURN  ; 符号フラグを見て、0だったらreturn
         SETIXL  #05     ;
         LDDA            ;       
         NOTA            ;
         INCA            ;
         STDA            ; 符号フラグが1の場合、ビット反転してインクリメントで負にして#05に格納
 RETURN: NOP             ;
-#8000   DC      #00     ; 定数0
-#8001   DC      #80     ; 引数が負かどうかを判定するための定数(1000 0000)
-#8002   DC      #00     ; 符号フラグ(0は正で1は負)
-#8003   DC      #50     ; 第1引数
-#8004   DC      #ff     ; 第2引数
+        SETIXL  #08     ;
+        LDDA            ;
+        SETIXH  #ff     ;
+        SETIXL  #fe     ;
+WAIT3:  LDDB            ;
+        JPZ     LOOP    ;
+        JP      WAIT3   ;
+LOOP:   SETIXH  #80     ;
+        SETIXL  #05     ;
+        LDIA    #00     ;
+        STDA            ;
+        JP      #0000   ;
