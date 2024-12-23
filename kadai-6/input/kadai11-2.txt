@@ -1,0 +1,142 @@
+PROGRAM START
+        SETIXH  #80     ;
+        SETIXL  #00     ; #8000: 定数 #00
+        LDIA    #00     ;
+        STDA            ;
+        SETIXL  #01     ; #8001: 定数 #80
+        LDIA    #80     ;
+        STDA            ;
+        SETIXL  #02     ; #8002: 符号フラグ初期化
+        LDIA    #00     ;
+        STDA            ;
+        SETIXL  #03     ; #8003: 第1引数初期化
+        LDIA    #00     ;
+        STDA            ;
+        SETIXL  #04     ; #8004: 第2引数初期化
+        LDIA    #00     ;
+        STDA            ;
+        SETIXL  #06     ; #8006: 定数 #08(第1引数確定用)
+        LDIA    #08     ;
+        STDA            ;
+        SETIXL  #07     ; #8007: 定数 #04(第2引数確定用)
+        LDIA    #04     ;
+        STDA            ;
+        SETIXL  #08     ; #8008: 定数 #02(リセット用)
+        LDIA    #02     ;
+        STDA            ;
+        SETIXL  #06     ; #08
+        LDDA            ;
+        SETIXH  #ff     ;
+        SETIXL  #fe     ; プッシュボタンのアドレス
+WAIT1:  LDDB            ; プッシュボタンの値をずっとウォッチする
+        CMP             ;
+        JPZ     INPUT1  ; #08が押されたら入力確定
+        JP      WAIT1   ;
+INPUT1: SETIXL  #ff     ; 
+        LDDB            ; 入力値をRegBに格納
+        SETIXH  #80     ;
+        SETIXL  #03     ;
+        STDB            ; 第1引数のメモリに格納
+        SETIXL  #00     ; 0をロード
+        LDDA            ;
+        SETIXL  #03     ; 第1引数
+        LDDB            ;
+        CMP             ;
+        JPZ     END     ; 第1引数が0だったら終了
+        SETIXL  #01     ;
+        LDDA            ;
+        ANDB            ; #80でマスク
+        SETIXL  #00     ;
+        LDDA            ;
+        CMP             ;
+        JPZ     CHECKB  ; 最上位ビットが1でない(正)だったら第2引数へ
+        SETIXL  #03     ; 第1引数
+        LDDB            ;
+        NOTB            ;
+        INCB            ; ビット反転してインクリメントで正に変換
+        STDB            ;
+        SETIXL  #02     ;
+        LDIB    #01     ; 符号フラグを立てる
+        STDB            ;
+CHECKB: NOP             ;
+        SETIXL  #07     ; #04
+        LDDA            ;
+        SETIXH  #ff     ;
+        SETIXL  #fe     ; プッシュボタンのアドレス
+WAIT2:  LDDB            ; プッシュボタンの値をウォッチ
+        CMP             ;
+        JPZ     INPUT2  ; #04が押されたら入力確定
+        JP      WAIT2   ;
+INPUT2: SETIXL  #ff     ;
+        LDDB            ; RegBに第2引数を格納
+        SETIXH  #80     ;
+        SETIXL  #04     ;
+        STDB            ; 第2引数のメモリに格納
+        SETIXL  #00     ;
+        LDDA            ;
+        SETIXL  #04     ;
+        LDDB            ;
+        CMP             ;
+        JPZ     END     ; 第2引数が0だったら終了
+        SETIXL  #01     ;
+        LDDA            ;
+        ANDB            ;
+        SETIXL  #00     ;
+        LDDA            ;
+        CMP             ;
+        JPZ     START   ; 第2引数が正だったら計算開始
+        SETIXL  #04     ;
+        LDDB            ;
+        NOTB            ;
+        INCB            ; ビット反転してインクリメントで正に変換
+        STDB            ;
+        SETIXL  #02     ;
+        LDDB            ;
+        CMP             ;
+        JPZ     ZERO    ; 符号フラグが0の場合はZEROへ飛ぶ
+        LDIB    #00     ; 符号フラグを0にする(負×負)
+        STDB            ;
+        JP      START   ;
+ZERO:   LDIB    #01     ; 符号フラグを1にする(正×負)
+        STDB            ;
+START:  NOP             ;
+        LDIA    #00     ; A=0(第2引数を足し合わせていく)
+        SETIXL  #04     ;       
+        LDDB            ; B={第2引数}
+LOOP:   NOP             ; 方針: RegAに第1引数を第2引数分だけ足し合わせる
+        JPZ     END     ; if B(第2引数)==0 jump END
+        SETIXL  #03     ;
+        LDDB            ; B={第1引数}
+        ADDA            ; A += B
+        SETIXL  #04     ;
+        LDDB            ;
+        DECB            ; 第2引数をデクリメント
+        STDB            ;
+        JP      LOOP    ;
+END:    NOP             ;
+        SETIXL  #05     ; 答えを格納するメモリ
+        STDA            ;
+        SETIXL  #00     ;
+        LDDA            ;
+        SETIXL  #02     ;
+        LDDB            ;
+        CMP             ;
+        JPZ     RETURN  ; 符号フラグを見て、0だったらreturn
+        SETIXL  #05     ;
+        LDDA            ;       
+        NOTA            ;
+        INCA            ;
+        STDA            ; 符号フラグが1の場合、ビット反転してインクリメントで負にして#05に格納
+RETURN: NOP             ;
+        SETIXL  #08     ;
+        LDDA            ;
+        SETIXH  #ff     ;
+        SETIXL  #fe     ;
+WAIT3:  LDDB            ;
+        JPZ     LOOP    ;
+        JP      WAIT3   ;
+LOOP:   SETIXH  #80     ;
+        SETIXL  #05     ;
+        LDIA    #00     ;
+        STDA            ;
+        JP      #0000   ;
