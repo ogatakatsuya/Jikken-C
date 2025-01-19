@@ -28,7 +28,7 @@ architecture logic of CProcessor is
   component DataPath
     port (
     DataIn    : in  std_logic_vector (7 downto 0);
-    selMuxDIn : in  std_logic;
+    selMuxDIn : in  std_logic_vector (1 downto 0);
 
     loadhMB   : in  std_logic;
     loadlMB   : in  std_logic;
@@ -72,7 +72,7 @@ architecture logic of CProcessor is
   
   component Controler
     port (
-    selMuxDIn : out std_logic;
+    selMuxDIn : out std_logic_vector (1 downto 0);
 
     loadhMB   : out std_logic;
     loadlMB   : out std_logic;
@@ -112,7 +112,7 @@ architecture logic of CProcessor is
     );
   end component;
 
-signal    selMuxDIn : std_logic;
+signal    selMuxDIn : std_logic_vector (1 downto 0);
 
 signal    loadhMB   : std_logic;
 signal    loadlMB   : std_logic;
