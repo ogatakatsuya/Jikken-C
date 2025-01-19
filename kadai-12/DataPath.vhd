@@ -10,7 +10,7 @@ use IEEE.std_logic_1164.all;
 entity DataPath is
   port (
     DataIn    : in  std_logic_vector (7 downto 0);
-    selMuxDIn : in  std_logic;
+    selMuxDIn : in  std_logic_vector (1 downto 0);
     selMuxDOut: in  std_logic_vector (1 downto 0);
 
     loadhMB   : in  std_logic;
@@ -44,7 +44,11 @@ entity DataPath is
     reset     : in  std_logic;
 
     Aout      : out std_logic_vector (7 downto 0);    -- added for debug on FPGA
-    Bout      : out std_logic_vector (7 downto 0)     -- added for debug on FPGA
+    Bout      : out std_logic_vector (7 downto 0);    -- added for debug on FPGA
+
+    modeShift : in  std_logic_vector (1 downto 0);
+    selMuxCOut: in  std_logic;
+    selMuxZOut: in  std_logic
   );
 end DataPath;
 
@@ -80,7 +84,7 @@ component Register16in2
     q     : out std_logic_vector(15 downto 0)
   );
 end component;
- 
+
 component ALU08
   port (
     a       : in  std_logic_vector(7 downto 0);
@@ -103,6 +107,15 @@ component Counter16
     clear : in  std_logic;
     reset : in  std_logic;
     q     : out std_logic_vector(15 downto 0)
+  );
+end component;
+
+component mux2x01
+  port (
+    a   : in  std_logic; 
+    b   : in  std_logic;
+    sel : in  std_logic;
+    q   : out std_logic
   );
 end component;
 
@@ -135,6 +148,17 @@ component mux4x08
    );
 end component;
 
+component Shifter
+  port (
+    a     : in  std_logic_vector(7 downto 0);
+    b     : in  std_logic_vector(7 downto 0);
+    mode  : in  std_logic_vector(1 downto 0);
+    fout  : out std_logic_vector(7 downto 0);
+    cout  : out std_logic;
+    zout  : out std_logic
+  );
+end component;
+
 signal qRegA      : std_logic_vector(7 downto 0);
 signal qRegB      : std_logic_vector(7 downto 0);
 signal qRegC      : std_logic_vector(7 downto 0);
@@ -145,6 +169,12 @@ signal foutALU    : std_logic_vector(7 downto 0);
 signal coutALU    : std_logic;
 signal zoutALU    : std_logic;
 signal DataInTmp  : std_logic_vector(7 downto 0);
+
+signal foutShifter: std_logic_vector(7 downto 0);
+signal coutShifter: std_logic;
+signal zoutShifter: std_logic;
+signal coutTMP    : std_logic;
+signal zoutTMP    : std_logic;
 --------------------------------
 
 signal zero     : std_logic;
@@ -159,10 +189,12 @@ zero <= '0';
 --       (c) Keishi SAKANUSHI --
 --                 2004/08/23 --
 --------------------------------
-MuxDIn : mux2x08
+MuxDIn : mux4x08
   port map (
     a   => foutALU,
     b   => DataIn,
+    c   => foutShifter,
+    d   => "XXXXXXXX",
     sel => selMuxDIn,
     q   => DataInTmp
   );
@@ -306,7 +338,7 @@ IR : Register08
 --------------------------------
 FC : Register01
   port map(
-    d     => coutALU,
+    d     => coutTMP,
     load  => loadFC,
     clock => clock,
     reset => reset,
@@ -322,7 +354,7 @@ FC : Register01
 --------------------------------
 FZ : Register01
   port map(
-    d     => zoutALU,
+    d     => zoutTMP,
     load  => loadFZ,
     clock => clock,
     reset => reset,
@@ -363,5 +395,31 @@ MuxDOut : Mux4x08
 
 Aout <= qRegA;  -- added for debug on FPGA
 Bout <= qRegB;  -- added for debug on FPGA
+
+Shifter : Shifter08
+  port map (
+    a     => qRegA,
+    b     => qRegC,
+    mode  => modeShifter,
+    fout  => foutShifter,
+    cout  => coutShifter,
+    zout  => zoutShifter
+  );
+
+MuxCOut : Mux2x01
+  port map (
+    a   => coutALU,
+    b   => coutShifter,
+    sel => selMuxCOut,
+    q   => coutTMP
+  );
+
+MuxZOut : Mux2x01
+  port map (
+    a   => zoutALU,
+    b   => zoutShifter,
+    sel => selMuxZOut,
+    q   => zoutTMP
+  );
 
 end logic;
