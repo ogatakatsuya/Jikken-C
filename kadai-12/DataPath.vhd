@@ -400,7 +400,7 @@ Shifter : Shifter08
   port map (
     a     => qRegA,
     b     => qRegC,
-    mode  => modeShifter,
+    mode  => modeShift,
     fout  => foutShifter,
     cout  => coutShifter,
     zout  => zoutShifter
