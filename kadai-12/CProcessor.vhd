@@ -6,7 +6,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
- 
+
 entity CProcessor is
   port (
     clock   : in std_logic;
@@ -62,7 +62,11 @@ architecture logic of CProcessor is
     reset     : in  std_logic;
 
     Aout      : out std_logic_vector (7 downto 0); -- added for debug on FPGA
-    Bout      : out std_logic_vector (7 downto 0)  -- added for debug on FPGA
+    Bout      : out std_logic_vector (7 downto 0); -- added for debug on FPGA
+
+    modeShift : in  std_logic_vector (1 downto 0);
+    selMuxCOut: in  std_logic;
+    selMuxZOut: in  std_logic
     );
   end component;
   
@@ -100,7 +104,11 @@ architecture logic of CProcessor is
     write     : out std_logic;
 
     clock     : in  std_logic;
-    reset     : in  std_logic	
+    reset     : in  std_logic;
+
+    modeShift : out std_logic_vector (1 downto 0);
+    selMuxCOut: out std_logic;
+    selMuxZOut: out std_logic
     );
   end component;
 
@@ -131,6 +139,10 @@ signal    loadRegA  : std_logic;
 signal    modeALU   : std_logic_vector (3 downto 0);
 signal    loadFZ    : std_logic;
 signal    loadFC    : std_logic;
+
+signal    modeShift : std_logic_vector (1 downto 0);
+signal    selMuxCOut: std_logic;
+signal    selMuxZOut: std_logic;
 
 begin    -- logic
 
@@ -172,7 +184,11 @@ path : DataPath
     reset     => reset,
 
     Aout      => dbgAout,   -- added for debug on FPGA
-    Bout      => dbgBout    -- added for debug on FPGA
+    Bout      => dbgBout,   -- added for debug on FPGA
+
+    modeShift => modeShift,
+    selMuxCOut=> selMuxCOut,
+    selMuxZOut=> selMuxZOut
   );
 
 ctrl : Controler
@@ -209,7 +225,11 @@ ctrl : Controler
     reset     => reset,
 
     read      => read,
-    write     => write
+    write     => write,
+
+    modeShift => modeShift,
+    selMuxCOut=> selMuxCOut,
+    selMuxZOut=> selMuxZOut
   );
 
 dbgIRout <= IRout;      -- added for debug on FPGA
