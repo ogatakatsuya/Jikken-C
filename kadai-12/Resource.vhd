@@ -1058,3 +1058,322 @@ q <= result;
 
 end logic;
 
+--------------------------------
+-- 1bit Multiplexer in 2      --
+--                            --
+--          (c) Katsuya OGATA --
+--                 2025/01/20 --
+--------------------------------
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity Mux2x01 is
+  port (
+    a   : in  std_logic; 
+    b   : in  std_logic;
+    sel : in  std_logic;
+    q   : out std_logic
+  ); 
+end Mux2x01;
+
+architecture logic of Mux2x01 is
+begin
+  q <=  a when sel = '0' else
+        b ;
+end logic;
+
+--------------------------------
+-- 1bit Shifter               --
+--                            --
+--          (c) Katsuya OGATA --
+--                 2025/01/20 --
+--------------------------------
+
+--------------------------------
+--                            --
+-- mode                       --
+--                            --
+-- '00' : LL                  --
+-- '01' : RL                  --
+-- '10' : LA                  --
+-- '11' : RA                  --
+--                            --
+--------------------------------
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity Shifter1 is
+  port (
+    a     : in  std_logic_vector(7 downto 0);
+    mode  : in  std_logic_vector(1 downto 0);
+    fout  : out std_logic_vector(7 downto 0);
+    cout  : out std_logic
+  );
+end Shifter1;
+
+architecture logic of Shifter1 is
+begin
+
+fout <= a(6 downto 0) & '0'         when mode = "00" -- SLL
+                                    else
+        '0' & a(7 downto 1)         when mode = "01" -- SRL
+                                    else
+        a(7) & a(5 downto 0) & '0'  when mode = "10" -- SLA
+                                    else
+        a(7) & a(7) & a(6 downto 1) when mode = "11" -- SRA
+                                    else
+        "XXXXXXXX";
+
+cout <= a(7)  when mode = "00"    -- SLL
+              else
+        a(0)  when mode = "01" or mode = "11"    -- SRA or SRL
+              else
+        a(6)  when mode = "10"    -- SLA
+              else
+        'X';
+
+end logic;
+
+--------------------------------
+-- 2bit Shifter               --
+--                            --
+--          (c) Katsuya OGATA --
+--                 2025/01/20 --
+--------------------------------
+
+--------------------------------
+--                            --
+-- mode                       --
+--                            --
+-- '00' : LL                  --
+-- '01' : RL                  --
+-- '10' : LA                  --
+-- '11' : RA                  --
+--                            --
+--------------------------------
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity Shifter2 is
+  port (
+    a     : in  std_logic_vector(7 downto 0);
+    mode  : in  std_logic_vector(1 downto 0);
+    fout  : out std_logic_vector(7 downto 0);
+    cout  : out std_logic
+  );
+end Shifter2;
+
+architecture logic of Shifter2 is
+begin
+
+fout <= a(5 downto 0) & "00"                when mode = "00" -- SLL
+                                            else
+        "00" & a(7 downto 2)                when mode = "01" -- SRL
+                                            else
+        a(7) & a(4 downto 0) & "00"         when mode = "10" -- SLA
+                                            else
+        a(7) & a(7) & a(7) & a(6 downto 2)  when mode = "11" -- SRA
+                                            else
+        "XXXXXXXX";
+
+cout <= a(6)  when mode = "00"    -- SLL
+              else
+        a(1)  when mode = "01" or mode = "11"    -- SRA or SRL
+              else
+        a(5)  when mode = "10"    -- SLA
+              else
+        'X';
+
+end logic;
+
+
+--------------------------------
+-- 4bit Shifter               --
+--                            --
+--          (c) Katsuya OGATA --
+--                 2025/01/20 --
+--------------------------------
+
+--------------------------------
+--                            --
+-- mode                       --
+--                            --
+-- '00' : LL                  --
+-- '01' : RL                  --
+-- '10' : LA                  --
+-- '11' : RA                  --
+--                            --
+--------------------------------
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity Shifter4 is
+  port (
+    a     : in  std_logic_vector(7 downto 0);
+    mode  : in  std_logic_vector(1 downto 0);
+    fout  : out std_logic_vector(7 downto 0);
+    cout  : out std_logic
+  );
+end Shifter4;
+
+architecture logic of Shifter4 is
+begin
+
+fout <= a(3 downto 0) & "0000"                            when mode = "00" -- SLL
+                                                          else
+        "0000" & a(7 downto 4)                            when mode = "01" -- SRL
+                                                          else
+        a(7) & a(2 downto 0) & "0000"                     when mode = "10" -- SLA
+                                                          else
+        a(7) & a(7) & a(7) & a(7) & a(7) & a(6 downto 4)  when mode = "11" -- SRA
+                                                          else
+        "XXXXXXXX";
+
+cout <= a(4)  when mode = "00"    -- SLL
+              else
+        a(3)  when mode = "01" or mode = "11"    -- SRA or SRL
+              else
+        a(3)  when mode = "10"    -- SLA
+              else
+        'X';
+
+end logic;
+
+
+--------------------------------
+-- 8bit Barrel Shifter        --
+--                            --
+--          (c) Katsuya OGATA --
+--                 2025/01/20 --
+--------------------------------
+
+--------------------------------
+--                            --
+-- mode                       --
+--                            --
+-- '00' : LL                  --
+-- '01' : RL                  --
+-- '10' : LA                  --
+-- '11' : RA                  --
+--                            --
+--------------------------------
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity Shifter is
+  port (
+    a     : in  std_logic_vector(7 downto 0);
+    b     : in  std_logic_vector(7 downto 0);
+    mode  : in  std_logic_vector(1 downto 0);
+    fout  : out std_logic_vector(7 downto 0);
+    cout  : out std_logic;
+    zout  : out std_logic
+  );
+end Shifter;
+
+architecture logic of Shifter is
+component Shifter1
+  port (
+    a     : in  std_logic_vector(7 downto 0);
+    mode  : in  std_logic_vector(1 downto 0);
+    fout  : out std_logic_vector(7 downto 0);
+    cout  : out std_logic
+  );
+end component;
+
+component Shifter2
+  port (
+    a     : in  std_logic_vector(7 downto 0);
+    mode  : in  std_logic_vector(1 downto 0);
+    fout  : out std_logic_vector(7 downto 0);
+    cout  : out std_logic
+  );
+end component;
+
+component Shifter4
+  port (
+    a     : in  std_logic_vector(7 downto 0);
+    mode  : in  std_logic_vector(1 downto 0);
+    fout  : out std_logic_vector(7 downto 0);
+    cout  : out std_logic
+  );
+end component;
+
+signal shift_stage1     : std_logic_vector(7 downto 0);
+signal unshift_stage1   : std_logic_vector(7 downto 0);
+signal shift_stage2     : std_logic_vector(7 downto 0);
+signal unshift_stage2   : std_logic_vector(7 downto 0);
+signal shift_stage4     : std_logic_vector(7 downto 0);
+signal unshift_stage4   : std_logic_vector(7 downto 0);
+signal temp_result1     : std_logic_vector(7 downto 0);
+signal temp_result2     : std_logic_vector(7 downto 0);
+signal final_result     : std_logic_vector(7 downto 0);
+signal carry_stage1     : std_logic;
+signal carry_stage2     : std_logic;
+signal carry_stage4     : std_logic;
+
+begin
+unshift_stage1 <= a;
+
+sft1 : Shifter1
+  port map (
+    a    => a,
+    mode => mode,
+    fout => shift_stage1,
+    cout => carry_stage1
+  );
+
+temp_result1 <= shift_stage1    when b(0) = '1'
+                                else
+                unshift_stage1  when b(0) = '0'
+                                else
+                "XXXXXXXX";
+
+unshift_stage2 <= temp_result1;
+
+sft2 : Shifter2
+  port map (
+    a    => temp_result1,
+    mode => mode,
+    fout => shift_stage2,
+    cout => carry_stage2
+  );
+
+temp_result2 <= shift_stage2      when b(1) = '1'
+                                  else
+                unshift_stage2    when b(1) = '0'
+                                  else
+                "XXXXXXXX";
+
+unshift_stage4 <= temp_result2;
+
+sft4 : Shifter4
+  port map (
+    a    => temp_result2,
+    mode => mode,
+    fout => shift_stage4,
+    cout => carry_stage4
+  );
+
+final_result <= shift_stage4      when b(2) = '1'
+                                  else
+                unshift_stage4    when b(2) = '0'
+                                  else
+                "XXXXXXXX";
+
+fout <= final_result;
+
+zout <= '1' when (final_result = "00000000")
+            else
+        '0';
+
+cout <= carry_stage4 when b(2) = '1'
+                    else
+        carry_stage2 when b(2) = '0' and b(1) = '1'
+                    else
+        carry_stage1 when b(2) = '0' and b(1) = '0' and b(0) = '1'
+                    else
+        '0';
+
+end logic;
