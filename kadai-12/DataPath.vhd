@@ -396,7 +396,7 @@ MuxDOut : Mux4x08
 Aout <= qRegA;  -- added for debug on FPGA
 Bout <= qRegB;  -- added for debug on FPGA
 
-Shifter : Shifter08
+Shifter08 : Shifter
   port map (
     a     => qRegA,
     b     => qRegC,
