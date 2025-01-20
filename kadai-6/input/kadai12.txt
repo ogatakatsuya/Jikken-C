@@ -1,0 +1,9 @@
+PROGRAM	START
+	LDIA	#FF
+	SLL	    #04
+    SRL     #04
+    LDIA    #FF
+    SLA     #03
+    SRA     #03
+	RET
+	END
