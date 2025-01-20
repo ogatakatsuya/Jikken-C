@@ -2,8 +2,14 @@ PROGRAM	START
 	LDIA	#FF
 	SLL	    #04
     SRL     #04
+    SLL     #01
+    SRL     #01
     LDIA    #FF
     SLA     #03
     SRA     #03
-	RET
-	END
+    LDIA    #11
+    SLA     #03
+    SRA     #03
+    LDIA    #FF
+    SLL     #08     
+END
