@@ -472,16 +472,16 @@ inc2IP   <= '1' when (qJCintD = '1' and irout(7 downto 4) = "0101" and ZeroF = '
             '1' when (qJCintD = '1' and irout(7 downto 4) = "0100" and CarryF = '0') else -- JPC(C=0)
             '0';
 
-selMuxDIn<= '01' when (qJCintC = "01" and irout(7 downto 3) = "11011")  else -- LDIA LDIB
-            '01' when (qJCintC = "01" and irout(7 downto 4) = "1110")   else -- LDDA LDDB
-            '01' when (qJCintC = "11" and irout(7 downto 3) = "11011")  else -- LDIA LDIB
-            '01' when (qJCintC = "11" and irout(7 downto 4) = "1110")   else -- LDDA LDDB
-            '01' when (qJCintF = "001" and irout(7 downto 3) = "11111") else -- STDI
-            '01' when (qJCintF = "011" and irout(7 downto 3) = "11111") else -- STDI
+selMuxDIn<= "01" when (qJCintC = "01" and irout(7 downto 3) = "11011")  else -- LDIA LDIB
+            "01" when (qJCintC = "01" and irout(7 downto 4) = "1110")   else -- LDDA LDDB
+            "01" when (qJCintC = "11" and irout(7 downto 3) = "11011")  else -- LDIA LDIB
+            "01" when (qJCintC = "11" and irout(7 downto 4) = "1110")   else -- LDDA LDDB
+            "01" when (qJCintF = "001" and irout(7 downto 3) = "11111") else -- STDI
+            "01" when (qJCintF = "011" and irout(7 downto 3) = "11111") else -- STDI
             "01" when (qJCintE = "01" and irout(7 downto 2) = "011100") else -- shift
             "01" when (qJCintE = "11" and irout(7 downto 2) = "011100") else -- shift
             "10" when (qJCintE = "10" and irout(7 downto 2) = "011100") else -- shift
-            '00' ;
+            "00" ;
 
 modeShift   <=  "01" when (qJCintE = "10" and irout(7 downto 0) = "01110001") else
                 "10" when (qJCintE = "10" and irout(7 downto 0) = "01110010") else
