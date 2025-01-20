@@ -44,6 +44,10 @@ var instructionSet = map[string]Instruction{
 	"JPC":    {Opcode: 0x40, Operand: "Address", Size: 3},
 	"JPZ":    {Opcode: 0x50, Operand: "Address", Size: 3},
 	"NOP":    {Opcode: 0x00, Operand: "None", Size: 1},
+	"SLL":    {Opcode: 0x70, Operand: "Immediate", Size: 2},
+	"SRL":    {Opcode: 0x71, Operand: "Immediate", Size: 2},
+	"SLA":    {Opcode: 0x72, Operand: "Immediate", Size: 2},
+	"SRA":    {Opcode: 0x73, Operand: "Immediate", Size: 2},
 	// 追加命令
 	// "PROGRAM": {Opcode: 0x00, Operand: "None", Size: 1},
 	// "END":     {Opcode: 0x00, Operand: "None", Size: 1},
